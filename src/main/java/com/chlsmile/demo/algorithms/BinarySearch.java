@@ -20,6 +20,8 @@ public class BinarySearch {
      *
      * @return 如果指定值包含在数组中,则返回搜索键的索引;否则返回-1
      */
+
+    //TODO 这个写法和jdk的java.util.Arrays中的binarySearch方法类似,start+end存在溢出的风险
     public static int binarySearch(int[] arr, int key){
 
         if(arr.length==0){
