@@ -1,5 +1,7 @@
 package com.chlsmile.demo.algorithms;
 
+import java.util.Arrays;
+
 /**
  * Created with: IntelliJ IDEA.
  * Function:二分查找法demo
@@ -8,26 +10,33 @@ package com.chlsmile.demo.algorithms;
  */
 public class BinarySearch {
 
+    /**
+     * binarySearch使用二分搜索法来搜索指定的int型数组,以获得指定的值在数组中的位置,需要确保数组是有序的,如果数组包含多个带有指定值的元素,则无法保证找到的是哪一个.
+     *
+     *
+     * @param arr 待查找的数组
+     *
+     * @param key 指定值
+     *
+     * @return 如果指定值包含在数组中,则返回搜索键的索引;否则返回-1
+     */
+    public static int binarySearch(int[] arr, int key){
 
-    public static int binarySearchCommon(int[] arraySrc, int key){
-
-        int index=arraySrc.length/2;
-        if(arraySrc[index]==key){
-            return index;
+        if(arr.length==0){
+            return -1;
         }
-
         int start=0;
-        int end=arraySrc.length-1;
+        int end=arr.length-1;
+
         while (start<=end){
-            int tempIndex=(end-start)/2;
-            if(arraySrc[tempIndex]==key){
-                return tempIndex;
-            }
-            if(arraySrc[tempIndex]>key){
-                start=0;
-                end=tempIndex;
+            int mid=(start+end)/2;
+            int midVal=arr[mid];
+            if(midVal<key){
+                start=mid+1;
+            }else if(midVal>key){
+                end=mid-1;
             }else{
-                start=tempIndex;
+                return mid;
             }
         }
         return -1;
@@ -37,15 +46,17 @@ public class BinarySearch {
         return -1;
     }
 
-    public static int binarySearchJdk(){
-        return -1;
-    }
 
 
     public static void main(String[] args) {
-        int[] arraySrc={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-        System.out.println("aaaaaaaa");
-        System.out.println(binarySearchCommon(arraySrc,13));
-        System.out.println("bbbb");
+        //int[] arraySrc={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        //int[] arraySrc={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+
+        int aaa=Integer.MAX_VALUE+Integer.MAX_VALUE+Integer.MAX_VALUE+Integer.MAX_VALUE+Integer.MAX_VALUE;
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println("aaa:"+aaa);
+
+        int[] arr={Integer.MAX_VALUE-3,Integer.MAX_VALUE-2,Integer.MAX_VALUE};
+        System.out.println(Arrays.binarySearch(arr,Integer.MAX_VALUE));
     }
 }
