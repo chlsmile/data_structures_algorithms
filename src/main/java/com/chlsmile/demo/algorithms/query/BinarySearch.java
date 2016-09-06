@@ -17,24 +17,15 @@ package com.chlsmile.demo.algorithms.query;
  *   3.2查找速度快,平均性能好;
  *
  * 4.缺点
- *   4.1其缺点是要求待查表为有序表，且插入删除困难
+ *   4.1其缺点是要求待查表为有序表,且插入删除困难.
  *
  * 5.复杂度分析
+ *   5.1平均时间复杂度 	O(log n)
+ *   5.2最差时间复杂度	O(log n)
+ *   5.3最优时间复杂度	O(1)
  *
- *
- * 1.二分查找又称折半查找,优点是比较次数少,查找速度快,平均性能好;其缺点是要求待查表为有序表,且插入删除困难。因此,二分查找方法适用于不经常变动而查找频繁的有序列表。
- *
- * 2.算法要求:
- *   必须采用顺序存储结构; 必须按关键字大小有序排列。
- *
- *
- * 3.复杂度分析
- *
- *   3.1时间复杂度:
- *      最优时间复杂度
- *   平均时间复杂度	O(log n)
- *   3.1时间复杂度:折半搜索每次把搜索区域减少一半,时间复杂度为（n代表集合中元素的个数）
- *
+ * 6.应用场景
+ *   6.1除直接在一个数组中查找元素外,可用在插入排序中。
  *
  *
  *
@@ -44,10 +35,7 @@ package com.chlsmile.demo.algorithms.query;
 public class BinarySearch {
 
     /**
-     * binarySearch使用二分搜索法来搜索指定的int型数组,以获得指定的值在数组中的位置,需要确保数组是有序的,如果数组包含多个带有指定值的元素,则无法保证找到的是哪一个.
-     *
-     * 这个写法与jdk的java.util.Arrays中的binarySearch方法类似,start+end存在溢出的风险
-     *
+     * binarySearchCommon 这种写法start+end存在溢出的风险,需要进行改进
      *
      * @param arr 待查找的数组
      *
@@ -55,8 +43,7 @@ public class BinarySearch {
      *
      * @return 如果指定值包含在数组中,则返回搜索键的索引;否则返回-1
      */
-
-    public static int binarySearch(int[] arr, int key){
+    public static int binarySearchCommon(int[] arr, int key){
 
         if(arr.length==0){
             return -1;
@@ -78,14 +65,70 @@ public class BinarySearch {
         return -1;
     }
 
-    public static int binarySearchRecursion(){
+    /**
+     * binarySearch 这种写法不存在溢出的风险
+     *
+     * @param arr 待查找的数组
+     *
+     * @param key 指定值
+     *
+     * @return 如果指定值包含在数组中,则返回搜索键的索引;否则返回-1
+     */
+    public static int binarySearch(int[] arr, int key){
+
+        if(arr.length==0){
+            return -1;
+        }
+        int start=0;
+        int end=arr.length-1;
+
+        while (start<=end){
+            int mid=(start+(end-start))/2;
+            int midVal=arr[mid];
+            if(midVal<key){
+                start=mid+1;
+            }else if(midVal>key){
+                end=mid-1;
+            }else{
+                return mid;
+            }
+        }
         return -1;
+    }
+
+
+    /**
+     * binarySearchRecursion 二分查找法递归实现
+     *
+     * @param arr  待查找的数组
+     *
+     * @param key  指定值
+     *
+     * @param start 数组开始位置
+     *
+     * @param end 数组结束位置
+     *
+     * @return 如果指定值包含在数组中,则返回搜索键的索引;否则返回-1
+     */
+    public static int binarySearchRecursion(int[] arr, int key, int start, int end){
+
+        if (start>end){
+            return -1;
+        }
+        int mid=start+(end-start)/2;
+        if (arr[mid] > key){
+            return binarySearchRecursion(arr, start, mid - 1, key);
+        }else if(arr[mid] < key){
+            return binarySearchRecursion(arr, mid + 1, end, key);
+        }else{
+            return mid;
+        }
     }
 
 
 
     public static void main(String[] args) {
         int[] arraySrc={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
-        System.out.println(binarySearch(arraySrc,20));
+        System.out.println(binarySearchCommon(arraySrc,20));
     }
 }

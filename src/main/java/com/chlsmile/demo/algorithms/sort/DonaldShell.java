@@ -3,8 +3,7 @@ package com.chlsmile.demo.algorithms.sort;
 /**
  * Created with: IntelliJ IDEA.
  * Function:希尔排序
- *
- * 1.算法介绍
+ * * 1.算法介绍
  *
  * 2.适用场景
  *
@@ -13,6 +12,7 @@ package com.chlsmile.demo.algorithms.sort;
  * 4.优点
  *
  * 5.缺点
+
  *
  *
  * User: chl_smile
