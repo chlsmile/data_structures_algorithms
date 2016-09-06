@@ -18,5 +18,5 @@ package com.chlsmile.demo.algorithms.sort;
  * User: chl_smile
  * Date: 2016-09-02 17:16:00
  */
-public class DonaldShell {
+public class DonaldShellSort {
 }
